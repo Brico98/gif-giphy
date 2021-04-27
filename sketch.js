@@ -2,9 +2,9 @@
 var api = 'https://api.giphy.com/v1/gifs/search?';
 var apiKey = '&api_key=R0JQHUXuv0Cmrshma64Ao9kilP5uLjrf';
 
-var clap = '&q=clap';
-var wow = '&q=wow';
-var dicaprio = '&q=dicaprio';
+var clap = '&q=dick';
+var wow = '&q=vagina';
+var dicaprio = '&q=fuck';
 
   function setup() {
     noCanvas();
