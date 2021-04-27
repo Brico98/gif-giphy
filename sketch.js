@@ -16,7 +16,7 @@ var dicaprio = '&q=dicaprio';
   }
 
   function gif(giphy) {
-    let numbers = ['1','2','3','4','5'];
+    let numbers = ['1','2','3','4','5','6'];
     let number = random(numbers);
     createImg(giphy.data[number].images.original.url);
   }
