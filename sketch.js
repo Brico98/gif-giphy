@@ -12,7 +12,7 @@ var clap = '&q=clap';
 var wow = '&q=wow';
 var dicaprio = '&q=dicaprio';
 
-//setup
+//setup 
 function setup() {
   noCanvas();
   readApiG();
