@@ -2,7 +2,7 @@
 var api = 'https://api.giphy.com/v1/gifs/search?';
 var apiKey = '&api_key=R0JQHUXuv0Cmrshma64Ao9kilP5uLjrf';
 
-var clap = '&q=dick';
+var clap = '&q=clap';
 var wow = '&q=wow';
 var dicaprio = '&q=dicaprio';
 
@@ -10,7 +10,7 @@ var img;
 
   function setup() {
     noCanvas();
-    var button = createButton('reset');
+    var button = createButton('next');
     button.mousePressed(resetSketch);
     resetSketch();
   }
@@ -25,6 +25,7 @@ function resetSketch(){
 }
 
   function gif(giphy) {
+    // Array per scegliere randomicamente una tra le prime 6 gif del risultato
     let numbers = ['1','2','3','4','5','6'];
     let number = random(numbers);
     img = createImg(giphy.data[number].images.original.url);
