@@ -1,5 +1,5 @@
 
-var api = 'https://api.giphy.com/v1/gifs/search?';
+var api = 'https://api.giphy.com/v1/randomid?';
 var apiKey = '&api_key=R0JQHUXuv0Cmrshma64Ao9kilP5uLjrf';
 
 var clap = '&q=clap';
@@ -19,14 +19,15 @@ function resetSketch(){
   let risultati = [clap, wow, dicaprio];
   var query = 'risultato' ;
   let risultato = random(risultati);
-  var url = api + apiKey + risultato;
+  var url = api + apiKey ;
   loadJSON(url, gif);
   img.remove();
 }
 
   function gif(giphy) {
     // Array per scegliere randomicamente una tra le prime 6 gif del risultato
-    let numbers = ['1','2','3','4','5','6'];
-    let number = random(numbers);
-    img = createImg(giphy.data[number].images.original.url);
+    //let numbers = ['1','2','3','4','5','6'];
+    //let number = random(numbers);
+    //img = createImg(giphy.data[number].images.original.url);
+    console.log(giphy);
   }
