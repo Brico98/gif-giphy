@@ -1,33 +1,34 @@
+// ricerca randomid
+var apiR = 'https://api.giphy.com/v1/randomid?';
 
-var api = 'https://api.giphy.com/v1/randomid?';
+// ricerca categoria
+var apiG = 'https://api.giphy.com/v1/gifs/search?';
+
+// apikey
 var apiKey = '&api_key=R0JQHUXuv0Cmrshma64Ao9kilP5uLjrf';
 
+// categorie
 var clap = '&q=clap';
 var wow = '&q=wow';
 var dicaprio = '&q=dicaprio';
 
-var img;
-
-  function setup() {
-    noCanvas();
-    var button = createButton('next');
-    button.mousePressed(resetSketch);
-    resetSketch();
-  }
-
-function resetSketch(){
-  let risultati = [clap, wow, dicaprio];
-  var query = 'risultato' ;
-  let risultato = random(risultati);
-  var url = api + apiKey ;
-  loadJSON(url, gif);
-  img.remove();
+//setup
+function setup() {
+  noCanvas();
+  readApiG();
+  readApiR();
 }
 
-  function gif(giphy) {
-    // Array per scegliere randomicamente una tra le prime 6 gif del risultato
-    //let numbers = ['1','2','3','4','5','6'];
-    //let number = random(numbers);
-    //img = createImg(giphy.data[number].images.original.url);
-    console.log(giphy);
-  }
+//lettura categoria
+function readApiG(){
+  var urlG = apiG + apiKey + clap;
+  loadJSON(urlG);
+  console.log(urlG);
+}
+
+// lettura randomid
+function readApiR(){
+  var urlR = apiR + apiKey;
+  loadJSON(urlR);
+  console.log(urlR);
+}
