@@ -18,7 +18,10 @@ function setup() {
   noCanvas();
   readApiR();
   readApiC();
+  timestamp();
 }
+
+
 
 //lettura categoria
 function readApiC(){
@@ -36,4 +39,13 @@ function readApiR(){
 
 function readDataImport(dataImport){
   console.log(dataImport.data[0].import_datetime);
+}
+
+function timestamp(){
+  var myDate = new Date("2017-07-31T15:30:00+0000");
+  var offset = myDate.getTimezoneOffset() * 60 * 1000;
+
+  var timestamp = myDate.getTime();
+
+  console.log(timestamp);
 }
