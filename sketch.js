@@ -37,10 +37,10 @@ function readApiR(){
   console.log(urlR);
 }
 
-//lettura data presa
-// function readDataImport(dataImport){
-//   console.log(dataImport.data[2].import_datetime);
-// }
+// lettura data presa
+function readDataImport(dataImport){
+  console.log(dataImport.data[2].import_datetime);
+}
 
 
 
