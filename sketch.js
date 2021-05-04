@@ -26,23 +26,26 @@ function setup() {
 //lettura categoria
 function readApiC(){
   var urlC = apiC + apiKey + clap;
-  loadJSON(urlC, readDataImport);
+  loadJSON(urlC, timestamp);
   console.log(urlC);
 }
 
 // lettura randomid
 function readApiR(){
   var urlR = apiR + apiKey;
-  loadJSON(urlR, );
+  loadJSON(urlR, timestamp);
   console.log(urlR);
 }
 
-function readDataImport(dataImport){
-  console.log(dataImport.data[0].import_datetime);
-}
+//lettura data presa
+// function readDataImport(dataImport){
+//   console.log(dataImport.data[2].import_datetime);
+// }
 
-function timestamp(){
-  var myDate = new Date("2017-07-31T15:30:00+0000");
+
+
+function timestamp(dataImport){
+  var myDate = new Date(dataImport.data[2].import_datetime);
   var offset = myDate.getTimezoneOffset() * 60 * 1000;
 
   var timestamp = myDate.getTime();
