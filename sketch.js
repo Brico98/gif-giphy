@@ -12,6 +12,9 @@ var clap = '&q=clap';
 var wow = '&q=wow';
 var dicaprio = '&q=dicaprio';
 
+// Array
+var oldNew = [0];
+
 
 //setup
 function setup() {
@@ -19,6 +22,7 @@ function setup() {
   readApiR();
   readApiC();
   timestamp();
+  riordina();
 }
 
 
@@ -41,14 +45,30 @@ function readApiR(){
 //   console.log(dataImport.data[2].import_datetime);
 // }
 
+
+
+
 function timestamp(dataImport){
-  for (let i = 0; i < 9; i++) {
-    var myDate = new Date(dataImport.data[i].import_datetime);
+
+  for (let dataGif = 0; dataGif < 49; dataGif++) {
+    var myDate = new Date(dataImport.data[dataGif].import_datetime);
     var offset = myDate.getTimezoneOffset() * 60 * 1000;
 
     var timestamp = myDate.getTime();
+    // push nell'array
+    var newLength = oldNew.push(timestamp);
 
-    console.log(timestamp);
+
+
+    // console.log(oldNew.lenght);
+    }
+    oldNew.forEach(function(item, index, array) {
+      // console.log(item, index);
+    })
 }
+
+function riordina(){
+//  var minimo = Math.min(oldNew) // 1
+ console.log("minimo");
 
 }
