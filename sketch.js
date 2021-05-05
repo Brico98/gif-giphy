@@ -22,7 +22,6 @@ function setup() {
 }
 
 
-
 //lettura categoria
 function readApiC(){
   var urlC = apiC + apiKey + clap;
@@ -38,17 +37,18 @@ function readApiR(){
 }
 
 // lettura data presa
-function readDataImport(dataImport){
-  console.log(dataImport.data[2].import_datetime);
-}
-
-
+// function readDataImport(dataImport){
+//   console.log(dataImport.data[2].import_datetime);
+// }
 
 function timestamp(dataImport){
-  var myDate = new Date(dataImport.data[2].import_datetime);
-  var offset = myDate.getTimezoneOffset() * 60 * 1000;
+  for (let i = 0; i < 9; i++) {
+    var myDate = new Date(dataImport.data[i].import_datetime);
+    var offset = myDate.getTimezoneOffset() * 60 * 1000;
 
-  var timestamp = myDate.getTime();
+    var timestamp = myDate.getTime();
 
-  console.log(timestamp);
+    console.log(timestamp);
+}
+
 }
