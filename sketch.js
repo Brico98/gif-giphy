@@ -11,7 +11,7 @@ var dicaprio = '&q=dicaprio';
 
 // Array
 var oldNew = [];
-
+var gifSort = [];
 
 //setup
 function setup() {
@@ -23,31 +23,60 @@ function setup() {
 
 }
 
+
 function draw() {
 }
 
 
-// lettura data presa
-// function readDataImport(dataImport){
-//   console.log(dataImport.data[2].import_datetime);
+function timestamp(dataImport){
+  //Array per scegliere randomicamente una tra le prime 6 gif del risultato
+//   let numbers = ['1','2','3','4','5','6'];
+//   let number = random(numbers);
+//   img = createImg(dataImport.data[number].images.original.url);
+//   console.log(giphy);
+//
 // }
 
-function timestamp(dataImport){
 
  for (let dataGif = 0; dataGif <= 49; dataGif++) {
+
+   //letturaJSON da isolare
     let letturaJSON = dataImport.data[dataGif].import_datetime;
     var myDate = new Date(letturaJSON);
     var offset = myDate.getTimezoneOffset() * 60 * 1000;
 
+    let imgsJSON = dataImport.data[dataGif].images.original.url;
+
     var timestamp = myDate.getTime();
     // push nell'array
-    oldNew.push(timestamp);
+      oldNew.push(timestamp);
 
+      gifSort.push(imgsJSON);
     }
+
     oldNew.forEach(function(item, index, array) {
       console.log(item, index);
     })
 
-    var minimo = Math.min(oldNew.length); // 1
+
+    var minimo = oldNew.sort(function(a, b){return a-b});  // 1
     console.log(minimo);
+
+    itemsArray.sort(function(dataImport, ){
+      return sortingArr.indexOf(gifSort) - sortingArr.indexOf(oldNew);
+    });
+
+      gifSorted = createImg.gifSort[3];
+
+    // immagini loadJSON
+    // let imgsJSON = dataImport.data[dataImport].images.original.url;
+    // Gifs.push(imgsJSON);
+
+  //  console.log(imgsJSON);
+
+
+
+
+
+
 }
