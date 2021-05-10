@@ -46,11 +46,9 @@ function timestamp(dataImport){
     var offset = myDate.getTimezoneOffset() * 60 * 1000;
 
     let imgsJSON = dataImport.data[dataGif].images.original.url;
-
     var timestamp = myDate.getTime();
     // push nell'array
       oldNew.push(timestamp);
-
       gifSort.push(imgsJSON);
     }
 
@@ -62,11 +60,9 @@ function timestamp(dataImport){
     var minimo = oldNew.sort(function(a, b){return a-b});  // 1
     console.log(minimo);
 
-    itemsArray.sort(function(dataImport, ){
-      return sortingArr.indexOf(gifSort) - sortingArr.indexOf(oldNew);
-    });
-
-      gifSorted = createImg.gifSort[3];
+    // itemsArray.sort(function(a, b){
+    //   return sortingArr.indexOf(gifSort) - sortingArr.indexOf(oldNew);
+    // });
 
     // immagini loadJSON
     // let imgsJSON = dataImport.data[dataImport].images.original.url;
