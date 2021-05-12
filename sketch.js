@@ -12,7 +12,7 @@ var dicaprio = '&q=dicaprio';
 // Array
 var oldNew = [];
 var gifSort = [];
-var gifObj;
+var myObj;
 //setup
 function setup() {
   noCanvas();
@@ -45,20 +45,42 @@ function timestamp(dataImport){
     let imgsJSON = dataImport.data[dataGif].images.original.url;
     var timestamp = myDate.getTime();
 
-    oldNew.push(timestamp);
-    gifSort.push(imgsJSON);
+    myObj = {
+      timestamp : [timestamp],
+      url : imgsJSON
 
     }
 
-    oldNew.forEach(function(item, index, array) {
-        gifObj = { [item] : gifSort[index] };
-        console.log(gifObj);
-    })
+    oldNew.push(myObj);
+    console.log(oldNew.sort(dynamicsort("timestamp")));
+  //  gifSort.push(imgsJSON);
+
+    }
 
 
+    function dynamicsort(property){
+      var sortOrder = 1;
+      if(property[0] === "-"){
 
-   var minimo = oldNew.sort(function(a, b){return a-b});  // 1
-   console.log(oldNew);
+        sortOrder = -1;
+        property = property.substr(1);
+      }
+        return function (a,b){
+          var result = (a[property] < b[property]) ? -1  : (a[property] > b[property]) ? 1 : 0;
+          return result = sortOrder;
+        }
+
+    }
+
+   //  oldNew.forEach(function(item, index, array) {
+   //      gifObj = { [item] : gifSort[index] };
+   //      console.log(gifObj);
+   //  })
+   //
+   //
+   //
+   // var minimo = oldNew.sort(function(a, b){return a-b});  // 1
+   // console.log(oldNew);
 
 
 
