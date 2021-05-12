@@ -52,11 +52,11 @@ function timestamp(dataImport){
     }
 
     oldNew.push(myObj);
-    console.log(oldNew.sort(dynamicsort("timestamp")));
+
   //  gifSort.push(imgsJSON);
 
     }
-
+    console.log(oldNew.sort(dynamicsort("timestamp")));
 
     function dynamicsort(property){
       var sortOrder = 1;
@@ -67,10 +67,12 @@ function timestamp(dataImport){
       }
         return function (a,b){
           var result = (a[property] < b[property]) ? -1  : (a[property] > b[property]) ? 1 : 0;
-          return result = sortOrder;
+          return result * sortOrder;
         }
 
     }
+
+
 
    //  oldNew.forEach(function(item, index, array) {
    //      gifObj = { [item] : gifSort[index] };
