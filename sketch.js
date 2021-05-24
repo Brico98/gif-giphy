@@ -1,43 +1,96 @@
+
+let serialPorts = ['/dev/tty.usbmodem143201','/dev/tty.Bluetooth-Incoming-Port'];
+let serials = [];
+let data = [];
+
+
+function serverConnected() {
+ print("Connected to Server");
+}
+
+function gotList(thelist) {
+ print("List of Serial Ports:");
+
+ for (let i = 0; i < thelist.length; i++) {
+  print(i + " " + thelist[i]);
+ }
+}
+
+function gotOpen() {
+ print("Serial Port is Open");
+}
+
+function gotClose(){
+ print("Serial Port is Closed");
+ latestData = "Serial Port is Closed";
+}
+
+function gotError(theerror) {
+ print(theerror);
+}
+
+function gotData(index) {
+ let currentString = serial[index].readLine();
+  trim(currentString);
+ if (!currentString) return;
+ console.log(currentString);
+ data[index] = currentString;
+}
+
+
 // ricerca categoria
 var apiC = 'https://api.giphy.com/v1/gifs/search?';
-
 // apikey
 var apiKey = '&api_key=R0JQHUXuv0Cmrshma64Ao9kilP5uLjrf';
-
 // categorie
 var clap = '&q=clap';
 var wow = '&q=wow';
 var dicaprio = '&q=dicaprio';
-
+var ricerca;
 // Array
 var oldNew = [];
 var gifSort = [];
 var myObj;
+
 //setup
 function setup() {
-  noCanvas();
+  createCanvas(windowWidth, windowHeight);
+  ricerca =
 
-  var urlC = apiC + apiKey + clap;
+
+  for(let i = 0; i < serialPorts.length; i++){
+   let newPort = new p5.SerialPort();
+
+   newPort.open(serialPorts[i]);
+
+   newPort.on('connected', serverConnected);
+   newPort.on('list', gotList);
+   newPort.on('data', gotData.bind(this, i));
+   newPort.on('error', gotError);
+   newPort.on('open', gotOpen);
+   newPort.on('gotClose', gotClose);
+
+   serials.push(newPort);
+
+
+  var urlC = apiC + apiKey + ricerca;
   loadJSON(urlC, timestamp);
   console.log(urlC);
 
-}
-
-function draw() {
-}
+    }
+  }
 
 function timestamp(dataImport){
   //Array per scegliere randomicamente una tra le prime 6 gif del risultato
-//   let numbers = ['1','2','3','4','5','6'];
-//   let number = random(numbers);
-//   img = createImg(dataImport.data[number].images.original.url);
-//   console.log(giphy);
-//
-// }
+  //   let numbers = ['1','2','3','4','5','6'];
+  //   let number = random(numbers);
+  //   img = createImg(dataImport.data[number].images.original.url);
+  //   console.log(giphy);
+  //
+  // }
+  for (let dataGif = 0; dataGif <= 49; dataGif++) {
 
- for (let dataGif = 0; dataGif <= 49; dataGif++) {
-
-   //letturaJSON da isolare
+    //letturaJSON da isolare
     let letturaJSON = dataImport.data[dataGif].import_datetime;
     var myDate = new Date(letturaJSON);
     var offset = myDate.getTimezoneOffset() * 60 * 1000;
@@ -48,7 +101,6 @@ function timestamp(dataImport){
     myObj = {
       timestamp : [timestamp],
       url : imgsJSON
-
     }
 
     oldNew.push(myObj);
@@ -56,6 +108,7 @@ function timestamp(dataImport){
   //  gifSort.push(imgsJSON);
 
     }
+
     console.log(oldNew.sort(dynamicsort("timestamp")));
 
     function dynamicsort(property){
@@ -87,8 +140,5 @@ function timestamp(dataImport){
 
 
   //  console.log(imgsJSON);
-
-
-
 
 }
