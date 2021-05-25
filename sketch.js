@@ -23,7 +23,7 @@ function setup() {
   /////////////////// Collegamento Arduino -> p5  ///////////////////
   serial = new p5.SerialPort();
   serial.list();
-  serial.open('/dev/tty.usbmodem1434201');
+  serial.open('/dev/tty.usbmodem141201');
   serial.on('connected', serverConnected);
   serial.on('list', gotList);
   serial.on('data', gotData);
@@ -56,6 +56,13 @@ function draw() {
     fill(0,255,0);
     ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
   }
+  //Array per scegliere randomicamente una tra le prime 6 gif del risultato
+  //   let numbers = ['1','2','3','4','5','6'];
+  //   let number = random(numbers);
+  //   img = createImg(dataImport.data[number].images.original.url);
+  //   console.log(giphy);
+  //
+  // }
 }
 
 function timestamp(dataImport){
@@ -87,7 +94,7 @@ function timestamp(dataImport){
   //  gifSort.push(imgsJSON);
 
     }
-    console.log(oldNew.sort(dynamicsort("timestamp")));
+    console.log(oldNew[0].url);
 
     function dynamicsort(property){
       var sortOrder = 1;
