@@ -16,9 +16,13 @@ var dicaprio = '&q=dicaprio';
 var oldNew = [];
 var gifSort = [];
 var myObj;
+
+//img
+var img;
 //setup
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  noCanvas();
+  img = createImg();
 
   /////////////////// Collegamento Arduino -> p5  ///////////////////
   serial = new p5.SerialPort();
@@ -32,38 +36,38 @@ function setup() {
   serial.on('close', gotClose);
   //////////////////////////////////////////////
 
-  var urlC = apiC + apiKey + clap;
+  var urlC = apiC + apiKey + dicaprio;
   loadJSON(urlC, timestamp);
   console.log(urlC);
 
 }
 
 function draw() {
- background(255,255,255);
- fill(0,0,0);
-  var pippo = round(map(latestData, 0, 1023, 0, 24));
-  print(pippo);
-  if (pippo>0 && pippo<5) {
-    fill(255,0,0);
-    ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
+ // background(255,255,255);
+ // fill(0,0,0);
+ //  var pippo = round(map(latestData, 0, 1023, 0, 24));
+ //  print(pippo);
+ //  if (pippo>0 && pippo<5) {
+ //    fill(255,0,0);
+ //    ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
+ //  }
+ //
+ //    if (pippo > 5 && pippo < 10) {
+ //    fill(0,0,255);
+ //    ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
+ //  }
+ //    if (pippo>9) {
+ //    fill(0,255,0);
+ //    ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
+ //  }
+  // Array per scegliere randomicamente una tra le prime 6 gif del risultato
+    // let numbers = ['1','2','3','4','5','6'];
+    // let number = random(numbers);
+    // img = createImg(dataImport.data[number].images.original.url);
+    // console.log(giphy);
+
   }
 
-    if (pippo > 5 && pippo < 10) {
-    fill(0,0,255);
-    ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
-  }
-    if (pippo>9) {
-    fill(0,255,0);
-    ellipse(windowWidth/2, windowHeight/2,latestData,latestData);
-  }
-  //Array per scegliere randomicamente una tra le prime 6 gif del risultato
-  //   let numbers = ['1','2','3','4','5','6'];
-  //   let number = random(numbers);
-  //   img = createImg(dataImport.data[number].images.original.url);
-  //   console.log(giphy);
-  //
-  // }
-}
 
 function timestamp(dataImport){
   //Array per scegliere randomicamente una tra le prime 6 gif del risultato
@@ -90,11 +94,9 @@ function timestamp(dataImport){
     }
 
     oldNew.push(myObj);
-
-  //  gifSort.push(imgsJSON);
-
     }
-    console.log(oldNew[0].url);
+    console.log(oldNew);
+    //
 
     function dynamicsort(property){
       var sortOrder = 1;
@@ -109,23 +111,6 @@ function timestamp(dataImport){
         }
 
     }
-
-
-
-   //  oldNew.forEach(function(item, index, array) {
-   //      gifObj = { [item] : gifSort[index] };
-   //      console.log(gifObj);
-   //  })
-   //
-   //
-   //
-   // var minimo = oldNew.sort(function(a, b){return a-b});  // 1
-   // console.log(oldNew);
-
-
-
-  //  console.log(imgsJSON);
-
 }
 
 /////////////////// Funzioni collegamento Arduino -> p5 ///////////////////
@@ -153,7 +138,12 @@ function gotData() {
   let currentString = serial.readLine();
   trim(currentString);
   if (!currentString) return;
-  console.log(currentString);
+//  console.log(currentString);
   latestData = currentString;
+
+
+  let m = floor(map(latestData,0, 1024, 0, 50));
+  //console.log(m);
+  img.attribute("src",oldNew[m].url);
 }
 //////////////////////////////////////////////
